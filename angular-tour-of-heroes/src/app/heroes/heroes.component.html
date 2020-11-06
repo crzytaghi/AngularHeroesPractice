@@ -1,0 +1,18 @@
+<!-- The Pipe | allows you to access the built-in properties of angular. -->
+
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <!-- *ngFor lists all of the heroes, it loops through the heroes array and assigns each iteration the value of hero. Similar to a for of loop. The (click) event binding to the li tells angular to listen for a click-->
+    <li *ngFor="let hero of heroes" (click)="onSelect(hero)"> 
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+
+<h2>{{hero.name | uppercase}} Details</h2>
+<div><span>id: </span>{{hero.id}}</div>
+<div>
+    <label>name:
+        <!-- ngModel is Angular's two-way data binding syntax -->
+        <input [(ngModel)]="hero.name" placeholder="name">
+    </label>
+</div>
