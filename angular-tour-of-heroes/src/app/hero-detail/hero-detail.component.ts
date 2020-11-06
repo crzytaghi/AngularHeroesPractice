@@ -1,10 +1,9 @@
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Hero } from "../hero";
-
 import { ActivatedRoute } from '@angular/router'; 
 import { Location } from '@angular/common';
 
+import { Hero } from "../hero";
 import { HeroService } from '../hero.service';
 
 @Component({
@@ -15,7 +14,7 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
 
   // This component simply receives a hero objext through its hero property and displays it. This allows Angular to share data between the parent context and the child directives or components. The @Input() property is writable while an @Output() property is observable.
-  @Input() hero: Hero;
+  hero: Hero;
 
   constructor(
     private route: ActivatedRoute, // Holds information about the Route to this instance of the HeroDetailComponent. This component is interested in the route's parameters extracted from the URL. The "id" parameter is the id of the hero to display.
@@ -35,6 +34,10 @@ export class HeroDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back(); // Allows the user to go back
+  }
+
+  save(): void {
+    this.heroService.updatedHero(this.hero).subscribe(() => this.goBack());
   }
 
 }

@@ -28,4 +28,20 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
+  /* Declaring the add method which adds a new hero to the database and clears the form field. When addHero saves successfully, the subscribe() method callback receives the new hero and pushes it into the heroes list for display. Declare the addHero() method in the HeroService class. */
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+
+  /* Declaring the delete() handler. We will initiate the deleteHero() method to the HeroService class. */
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero).subscribe();
+  }
+
 }
